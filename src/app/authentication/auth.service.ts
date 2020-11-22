@@ -55,11 +55,12 @@ export class AuthService {
   }
   private updateUserData(user: firebase.User | null) {
     if (user != null) {
-      const userRef = this.fireStore.doc('users/${user.uid}');
+      const userRef = this.fireStore.doc('users/' + user.uid);
       const data = {
         uid: user.uid,
         displayName: user.displayName,
-        email: user.email
+        email: user.email,
+        isAdmin: false
       };
 
       return userRef.set(data, {merge: true});
