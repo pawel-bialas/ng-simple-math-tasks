@@ -14,6 +14,8 @@ import {UserService} from "../user/user.service";
 export class AuthService {
 
   public dbUser: Observable<firebase.User | null>;
+  public userModel: Observable<UserModel | null>;
+
 
   constructor(
     private fireAuth: AngularFireAuth,
@@ -23,6 +25,7 @@ export class AuthService {
     private userService: UserService
   ) {
     this.dbUser = this.fireAuth.authState;
+    this.userModel = this.credentials();
   }
 
   async googleSignIn() {
@@ -36,22 +39,20 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  get userModel(): Observable<UserModel | null> {
-    let userModel: UserModel;
+  credentials(): Observable<UserModel | null> {
     return this.dbUser.pipe(switchMap(user => {
-      if (user !== null) {
-        userModel.uid = user.uid;
-        userModel.email = user.email;
-        userModel.displayName = user.displayName
-        userModel.isAdmin = false;
-        return of(userModel);
-      } else {
-        return of(null);
-      }
+          if (user) {
+            return of(new UserModel(
+              user.uid,
+              user.displayName,
+              user.email,
+              false
+            ));
+          } else {
+            return of(null)
+          }
     }))
-
   }
-
   private updateUserData(user: firebase.User | null) {
     if (user != null) {
       const userRef = this.fireStore.doc('users/${user.uid}');

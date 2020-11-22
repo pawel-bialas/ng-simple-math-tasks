@@ -13,11 +13,11 @@ export class AppComponent {
   title = 'simple-math-tasks';
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private userService: UserService,
     private router: Router
   ) {
-    authService.user.subscribe(user => {
+    authService.dbUser.subscribe(user => {
       if (!user) {
         return;
       } else {

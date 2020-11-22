@@ -1,9 +1,14 @@
 <h1>BASE</h1>
 <hr>
-
-<div *ngIf="">
+<div *ngIf="authService.userModel | async as user; else login">
+  {{user | json}}
+  <hr>
+  <button class="btn btn-primary" (click)="authService.signOut()">SignOut</button>
 
 </div>
+<ng-template #login>
+  <button class="btn btn-primary" (click)="authService.googleSignIn()">Login with Google</button>
+</ng-template>
 
 
 
