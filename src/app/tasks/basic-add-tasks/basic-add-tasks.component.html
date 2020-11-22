@@ -1,0 +1,14 @@
+<div class="app-container">
+  <p class="task-content">{{givenNum}} + </p>
+  <input class="user-input"
+         [(ngModel)]="whenNum"
+         type="number"
+         id="userInput"
+  >
+  <p class="task-content"> = {{resultNum}}</p>
+</div>
+<div class="app-container">
+  <button class="check-answer-button" (click)="onSubmit()">Zatwierdź</button>
+</div>
+
+

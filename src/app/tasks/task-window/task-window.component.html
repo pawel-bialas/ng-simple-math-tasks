@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <ng-container *ngFor="let i of [].constructor(20)">
+        <basic-add-tasks (solution)="updateRecord($event)"></basic-add-tasks>
+        <div *ngIf="(i + 1) % 2 === 0" class="w-100">BL</div>
+      </ng-container>
+    </div>
+    <div class="col-3">
+      <h1>{{completeSolution.length}}</h1>
+    </div>
+  </div>
+</div>
+

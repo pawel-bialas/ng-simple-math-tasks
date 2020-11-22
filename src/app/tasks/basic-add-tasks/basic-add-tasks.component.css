@@ -1,0 +1,29 @@
+.app-container{
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  justify-content: center;
+  margin: 4%;
+}
+
+.check-answer-button {
+  display: flex;
+  flex-direction: row;
+  width: 20%;
+  height: 5%;
+  background-color: aqua;
+  font-size: 1rem;
+  margin: 2%;
+}
+
+.task-content{
+  font-size: 1rem;
+  margin: 2%;
+  justify-content: center;
+}
+
+.user-input {
+  width: 2rem;
+  margin: 2%;
+  justify-content: center;
+}
