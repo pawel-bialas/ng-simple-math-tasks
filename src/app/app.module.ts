@@ -7,6 +7,8 @@ import {FormsModule} from "@angular/forms";
 
 import {environment} from '../environments/environment';
 
+import {MaterialModule} from "./material/material.module";
+
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { BasicAddTasksComponent } from './tasks/basic-add-tasks/basic-add-tasks.component';
@@ -32,10 +34,14 @@ import {AngularFireDatabaseModule} from "@angular/fire/database";
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+  ],
+  exports: [
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

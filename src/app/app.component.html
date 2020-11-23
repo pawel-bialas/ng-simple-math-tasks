@@ -1,19 +1,23 @@
-<h1>BASE</h1>
-<hr>
-<div *ngIf="authService.userModel | async as user; else login">
-  {{user | json}}
-  <hr>
-  <button class="btn btn-primary" (click)="authService.signOut()">SignOut</button>
-
-</div>
-<ng-template #login>
-  <button class="btn btn-primary" (click)="authService.googleSignIn()">Login with Google</button>
-</ng-template>
+<main-nav></main-nav>
+<task-window></task-window>
+<router-outlet></router-outlet>
 
 
 
+<!--<h1>BASE</h1>-->
+<!--<hr>-->
+<!--<div *ngIf="authService.userModel | async as user; else login">-->
+<!--  {{user | json}}-->
+<!--  <hr>-->
+<!--  <button class="btn btn-primary" (click)="authService.signOut()">SignOut</button>-->
+
+<!--</div>-->
+<!--<ng-template #login>-->
+<!--  <button class="btn btn-primary" (click)="authService.googleSignIn()">Login with Google</button>-->
+<!--</ng-template>-->
 
 
-<!--<main-nav></main-nav>-->
-<!--<task-window></task-window>-->
-<!--<router-outlet></router-outlet>-->
+
+
+
+
