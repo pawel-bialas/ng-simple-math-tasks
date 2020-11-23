@@ -1,14 +1,33 @@
-<div class="app-container">
-  <p class="task-content">{{givenNum}} + </p>
-  <input class="user-input"
-         [(ngModel)]="whenNum"
-         type="number"
-         id="userInput"
-  >
-  <p class="task-content"> = {{resultNum}}</p>
-</div>
-<div class="app-container">
-  <button class="check-answer-button" (click)="onSubmit()">Zatwierdź</button>
-</div>
+<div [class.task-complete.container]="!toggleButton" class="container task-area">
+  <div class="app-container">
+    <p class="task-content">{{givenNum}} + ? = {{resultNum}}</p>
+    <hr>
+  </div>
+  <div class="check-answer">
+    <form class="form-group task-form">
+        <mat-form-field class="input-full-width">
+          <mat-label>Answer</mat-label>
+            <input
+              matInput
+              name="whenNum"
+              [(ngModel)]="whenNum"
+              type="number"
+            >
+        </mat-form-field>
+      <div class="input-full-width">
+        <button
+          mat-raised-button color="primary"
+          style="margin-left: 7px"
+          [disabled]="!toggleButton"
+          (click)="addAnswer()"
+          type="submit"
+        >++ Add ++
+        </button>
+      </div>
+    </form>
+    <hr>
+    <div class="">
+    </div>
 
-
+  </div>
+</div>

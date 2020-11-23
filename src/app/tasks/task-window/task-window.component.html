@@ -1,13 +1,19 @@
 <div class="container">
+  <div class="row quantity-options">
+    <button class="quantity-option" mat-raised-button color="primary" (click)="updateTasksQuantity(4)">4</button>
+    <button class="quantity-option" mat-raised-button color="primary" (click)="updateTasksQuantity(10)">10</button>
+    <button class="quantity-option" mat-raised-button color="primary"(click)="updateTasksQuantity(20)">20</button>
+  </div>
   <div class="row">
-    <div class="col-9">
-      <ng-container *ngFor="let i of [].constructor(20)">
+    <div class="col-6">
+      <ng-container *ngFor="let i of [].constructor(10)">
         <basic-add-tasks (solution)="updateRecord($event)"></basic-add-tasks>
-        <div *ngIf="(i + 1) % 2 === 0" class="w-100">BL</div>
       </ng-container>
     </div>
-    <div class="col-3">
-      <h1>{{completeSolution.length}}</h1>
+    <div class="col-6">
+      <ng-container *ngFor="let i of [].constructor(10)">
+        <basic-add-tasks (solution)="updateRecord($event)"></basic-add-tasks>
+      </ng-container>
     </div>
   </div>
 </div>

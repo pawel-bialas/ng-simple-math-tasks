@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TaskWindowComponent implements OnInit {
 
   completeSolution: any[] = [];
+  taskQuantity: number = 4;
 
   constructor() { }
 
@@ -20,4 +21,7 @@ export class TaskWindowComponent implements OnInit {
     console.log(this.completeSolution);
   }
 
+  updateTasksQuantity(number: number) {
+    this.taskQuantity = number;
+  }
 }

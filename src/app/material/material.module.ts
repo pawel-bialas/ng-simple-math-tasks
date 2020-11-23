@@ -12,6 +12,7 @@ import {MatIconModule} from "@angular/material/icon";
 
 
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -26,7 +27,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatRadioModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatIconModule,
+    MatIconModule
   ],
   exports: [
     MatToolbarModule,

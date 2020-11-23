@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {UUID} from "angular2-uuid";
+import {MaterialModule as Material} from "../../material/material.module";
 
 @Component({
   selector: 'basic-add-tasks',
@@ -12,6 +13,7 @@ export class BasicAddTasksComponent implements OnInit, OnDestroy {
   public whenNum: number;
   resultNum: number;
   uuid: String;
+  toggleButton: boolean = true;
   @Output() solution: EventEmitter<any> = new EventEmitter<any>();
 
 
@@ -26,7 +28,7 @@ export class BasicAddTasksComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
+  addAnswer(): void {
     this.solution.emit(
       {
         task: [this.givenNum, this.whenNum, this.resultNum],
@@ -34,6 +36,7 @@ export class BasicAddTasksComponent implements OnInit, OnDestroy {
         result: this.checkAnswer()
       }
     )
+    this.toggleButton = !this.toggleButton;
   }
 
   checkAnswer(): boolean {
