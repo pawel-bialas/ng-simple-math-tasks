@@ -1,6 +1,6 @@
 <div [class.task-complete.container]="!toggleButton" class="container task-area">
   <div class="app-container">
-    <p class="task-content">{{givenNum}} + ? = {{resultNum}}</p>
+    <p class="task-content">{{givenNum}} + {{whenNum}} = ?</p>
     <hr>
   </div>
   <div class="check-answer">
@@ -10,7 +10,7 @@
             <input
               matInput
               name="whenNum"
-              [(ngModel)]="whenNum"
+              [(ngModel)]="resultNum"
               type="number"
             >
         </mat-form-field>

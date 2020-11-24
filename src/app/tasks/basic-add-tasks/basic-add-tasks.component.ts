@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UUID} from "angular2-uuid";
-import {MaterialModule as Material} from "../../material/material.module";
+import {TasksOptions} from "../model/TasksOptions";
+
 
 @Component({
   selector: 'basic-add-tasks',
@@ -16,13 +17,11 @@ export class BasicAddTasksComponent implements OnInit, OnDestroy {
   toggleButton: boolean = true;
   @Output() solution: EventEmitter<any> = new EventEmitter<any>();
 
-
-
   constructor() {
     this.uuid = UUID.UUID();
-    this.givenNum = Math.floor((Math.random() * 10) + 1);
-    this.whenNum = 0;
-    this.resultNum = Math.floor((Math.random() * 10) + 1 + this.givenNum);
+    this.givenNum = Math.floor((Math.random() * 5) + 1);
+    this.whenNum = Math.floor((Math.random() *  5) + 1 + this.givenNum);
+    this.resultNum = 0
   }
 
   ngOnInit(): void {

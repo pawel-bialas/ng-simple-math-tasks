@@ -1,4 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import{TasksOptions} from "../model/TasksOptions";
 
 @Component({
   selector: 'task-window',
@@ -8,17 +10,18 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class TaskWindowComponent implements OnInit {
 
   completeSolution: any[] = [];
-  taskQuantity: number = 4;
-  @Output() markStart: EventEmitter<boolean> = new EventEmitter<boolean>();
+  tasksOptions: TasksOptions = new TasksOptions(4, 10, 'right');
 
-  constructor() { }
+  constructor() {
 
+  }
   ngOnInit(): void {
     this.completeSolution = [];
+
   }
 
   startChallenge(): void {
-    this.markStart.emit(true);
+
   }
 
   updateRecord($event: any): void {
@@ -26,7 +29,16 @@ export class TaskWindowComponent implements OnInit {
     console.log(this.completeSolution);
   }
 
-  updateTasksQuantity(number: number) {
-    this.taskQuantity = number;
+  updateQuantity(quantity: number): void {
+    this.tasksOptions.quantity = quantity;
   }
+
+  updateRange(range: number):void {
+    this.tasksOptions.range = range;
+  }
+
+  updateVariant(variant: String):void {
+    this.tasksOptions.variant = variant;
+  }
+
 }
