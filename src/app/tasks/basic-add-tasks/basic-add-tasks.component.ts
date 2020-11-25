@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {UUID} from "angular2-uuid";
 import {TasksOptions} from "../model/TasksOptions";
+import {TasksOptionsService} from "../service/tasks-options.service";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -10,24 +12,54 @@ import {TasksOptions} from "../model/TasksOptions";
 })
 export class BasicAddTasksComponent implements OnInit, OnDestroy {
 
-  givenNum: number;
-  public whenNum: number;
-  resultNum: number;
+  givenNum: number = 0;
+  whenNum: number = 0;
+  resultNum: number = 0;
+  userNumber: number = 0;
   uuid: String;
   toggleButton: boolean = true;
   @Output() solution: EventEmitter<any> = new EventEmitter<any>();
+  tasksOptions$: Observable<TasksOptions> = this.tasksOptionsService.data$;
+  tasksOptions!: TasksOptions;
 
-  constructor() {
+  constructor(private tasksOptionsService: TasksOptionsService) {
+    this.tasksOptions$.subscribe(value => {
+      this.tasksOptions = new TasksOptions(value.quantity, value.range, value.variant);
+    });
     this.uuid = UUID.UUID();
-    this.givenNum = Math.floor((Math.random() * 5) + 1);
-    this.whenNum = Math.floor((Math.random() *  5) + 1 + this.givenNum);
-    this.resultNum = 0
+    if (this.tasksOptions.variant === 'right'){
+      this.givenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1);
+      this.whenNum = Math.floor((Math.random() *  this.tasksOptions.range / 2) + 1 + this.givenNum);
+      this.resultNum = 0
+    }
+    if (this.tasksOptions.variant === 'center') {
+      this.givenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1);
+      this.whenNum = 0;
+      this.resultNum = Math.floor((Math.random() *  this.tasksOptions.range / 2) + 1 + this.givenNum);
+
+    }
+    if (this.tasksOptions.variant === 'left') {
+      this.givenNum = 0;
+      this.whenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1);
+      this.resultNum = Math.floor((Math.random() *  this.tasksOptions.range / 2) + 1 + this.whenNum);
+    }
+
   }
 
   ngOnInit(): void {
+
   }
 
   addAnswer(): void {
+    if (this.tasksOptions.variant === 'right') {
+     this.resultNum = this.userNumber;
+    }
+    if (this.tasksOptions.variant === 'center') {
+     this.whenNum = this.userNumber;
+    }
+    if (this.tasksOptions.variant === 'left') {
+      this.givenNum = this.userNumber;
+    }
     this.solution.emit(
       {
         task: [this.givenNum, this.whenNum, this.resultNum],

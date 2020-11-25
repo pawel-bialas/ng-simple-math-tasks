@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import{TasksOptions} from "../model/TasksOptions";
+import {TasksOptionsService} from "../service/tasks-options.service";
 
 @Component({
   selector: 'task-window',
@@ -10,9 +11,10 @@ import{TasksOptions} from "../model/TasksOptions";
 export class TaskWindowComponent implements OnInit {
 
   completeSolution: any[] = [];
-  tasksOptions: TasksOptions = new TasksOptions(4, 10, 'right');
+  isStarted: boolean = false;
+  tasksOptions: TasksOptions = new TasksOptions(0, 10, 'right');
 
-  constructor() {
+  constructor(private tasksOptionsService: TasksOptionsService)  {
 
   }
   ngOnInit(): void {
@@ -21,7 +23,8 @@ export class TaskWindowComponent implements OnInit {
   }
 
   startChallenge(): void {
-
+    this.tasksOptionsService.updateSetup(this.tasksOptions);
+    this.isStarted = !this.isStarted;
   }
 
   updateRecord($event: any): void {
@@ -31,14 +34,19 @@ export class TaskWindowComponent implements OnInit {
 
   updateQuantity(quantity: number): void {
     this.tasksOptions.quantity = quantity;
+    this.tasksOptionsService.updateSetup(this.tasksOptions);
   }
 
   updateRange(range: number):void {
     this.tasksOptions.range = range;
+    this.tasksOptionsService.updateSetup(this.tasksOptions);
   }
 
   updateVariant(variant: String):void {
     this.tasksOptions.variant = variant;
+    this.tasksOptionsService.updateSetup(this.tasksOptions);
   }
+
+
 
 }
