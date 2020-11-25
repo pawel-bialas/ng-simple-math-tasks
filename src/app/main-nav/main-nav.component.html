@@ -1,45 +1,74 @@
-<div class="navbar navbar-expand-md navbar-dark bg-dark static-top margin-bottom sticky-top">
-  <a class="navbar-brand" routerLink="/">Sample-Ng-Store</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/my/cart">
-          Shopping Cart
-          <span
-            class="badge badge-warning badge-pill">
-          </span>
-          <span class="sr-only">(current)</span>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a [routerLink]="['/home']" mat-button>
+        <mat-icon>home</mat-icon>
+        Home
+      </a>
+      <a  mat-button>
+        <mat-icon>group_add</mat-icon>
+        Sign Up!
+      </a>
+      <a  mat-button>
+        <mat-icon>lock_open</mat-icon>
+        Login
+      </a>
+      <a  mat-button>
+        <mat-icon>lock</mat-icon>
+        Logout
+      </a>
+      <a style="justify-content: flex-end" mat-button>
+        <mat-icon>announcement</mat-icon>
+        New Post
+      </a>
+      <a (click)="drawer.toggle()" mat-button>
+        <mat-icon>close</mat-icon>
+        Close
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div fxHide.lt-md>
+        <span class="spacer"></span>
+        <a [routerLink]="['/home']" mat-button>
+          <mat-icon>home</mat-icon>
+          Home
         </a>
-      </li>
-      <ng-template >
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
-        </li>
-      </ng-template >
-      <li ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-           aria-expanded="false">ABCD</a>
-        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
-          <ng-container>
-            <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
-            <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
-          </ng-container>
-          <a class="dropdown-item">Logout</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</div>
-<div>
-
-</div>
+        <a mat-button>
+          <mat-icon>group_add</mat-icon>
+          Sign Up!
+        </a>
+        <a mat-button>
+          <mat-icon>lock_open</mat-icon>
+          Login
+        </a>
+        <a mat-button>
+          <mat-icon>lock</mat-icon>
+          Logout
+        </a>
+        <a style="justify-content: flex-end" mat-button>
+          <mat-icon>announcement</mat-icon>
+          New Post
+        </a>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -13,6 +13,7 @@ export class TaskWindowComponent implements OnInit {
   completeSolution: any[] = [];
   isStarted: boolean = false;
   tasksOptions: TasksOptions = new TasksOptions(0, 10, 'right');
+  score: number = 0;
 
   constructor(private tasksOptionsService: TasksOptionsService)  {
 
@@ -48,5 +49,13 @@ export class TaskWindowComponent implements OnInit {
   }
 
 
-
+  getResult() {
+    let result: number = 0;
+    this.completeSolution.forEach(task => {
+      if (task.result === true) {
+        result = result + 1;
+      }
+    })
+    this.score = result;
+  }
 }

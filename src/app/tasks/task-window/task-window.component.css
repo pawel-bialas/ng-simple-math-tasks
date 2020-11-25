@@ -29,3 +29,11 @@
   margin: 10%;
 }
 
+.setup-text{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 5%;
+  margin: 2%;
+}
+
