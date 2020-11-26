@@ -5,7 +5,9 @@
         <span class="spacer"></span>
         <span>Progress: {{completeSolution.length}} / {{tasksOptions.quantity}}</span>
         <div>
-          <button [disabled]="completeSolution.length < tasksOptions.quantity" (click)="getResult()" mat-raised-button color="accent" style="margin-left: 7px">R E S U L T</button>
+          <button [disabled]="completeSolution.length < tasksOptions.quantity" (click)="getResult()" mat-raised-button
+                  color="accent" style="margin-left: 7px">R E S U L T
+          </button>
         </div>
         <span *ngIf="score > 0">Result: {{score}} / {{tasksOptions.quantity}}</span>
         <span class="spacer"></span>
@@ -18,7 +20,19 @@
         <span class="spacer"></span>
         <span>Set up</span>
         <span class="spacer"></span>
-        <span>Choose task options and press START</span>
+        <span>Choose task options and press
+          <button
+            [disabled]="tasksOptions.quantity < 1"
+            (click)="startChallenge()"
+            mat-raised-button color="primary"
+            style="margin-left: 7px">
+            START
+          </button>
+        </span>
+        <span>Operator: {{tasksOptions.mathOperator}}</span>
+        <span>Quantity: {{tasksOptions.quantity}}</span>
+        <span>Range: {{tasksOptions.range}}</span>
+        <span>Variant: {{tasksOptions.qMarkPosition.toString()}}</span>
         <span class="spacer"></span>
       </mat-toolbar>
     </div>
@@ -27,27 +41,26 @@
         <h2>Select operator</h2>
         <div class="button-container">
           <div class="setup-option">
-            <button mat-fab color="accent" (click)="updateOperator('+')">
+            <button mat-fab color="accent" (click)="updateOperator(mathOperator.add)">
               +
             </button>
           </div>
           <div class="setup-option">
-            <button mat-fab color="accent" (click)="updateOperator('-')">
+            <button mat-fab color="accent" (click)="updateOperator(mathOperator.subtract)">
               -
             </button>
           </div>
           <div class="setup-option">
-            <button mat-fab color="accent" (click)="updateOperator('*')">
-             *
+            <button mat-fab color="accent" (click)="updateOperator(mathOperator.multiply)">
+              *
             </button>
           </div>
         </div>
         <div class="setup-option">
-          <button mat-fab color="accent" (click)="updateOperator('/')">
+          <button mat-fab color="accent" (click)="updateOperator(mathOperator.divide)">
             /
           </button>
         </div>
-      </div>
       </div>
       <div class="setup-container">
         <h2>How many tasks?</h2>
@@ -88,29 +101,25 @@
         <h2>Question mark</h2>
         <div class="button-container">
           <div class="setup-option">
-            <button mat-fab color="accent" (click)="updateVariant('left')">
+            <button mat-fab color="accent" (click)="updateVariant(qMarkPosition.left)">
               left
             </button>
           </div>
           <div class="setup-option">
-            <button mat-fab color="accent" (click)="updateVariant('center')">
+            <button mat-fab color="accent" (click)="updateVariant(qMarkPosition.center)">
               center
             </button>
           </div>
           <div class="setup-option">
-            <button mat-fab color="accent" (click)="updateVariant('right')">
+            <button mat-fab color="accent" (click)="updateVariant(qMarkPosition.right)">
               right
             </button>
           </div>
         </div>
       </div>
-      <div class="setup-container">
-        <h3>{{tasksOptions | json}}</h3>
-        <button [disabled]="tasksOptions.quantity < 1" (click)="startChallenge()" mat-raised-button color="primary" style="margin-left: 7px">START</button>
-      </div>
 
+    </div>
   </ng-container>
-
   <ng-container *ngIf="isStarted" class="container">
     <div class="row">
       <div class="col-6">

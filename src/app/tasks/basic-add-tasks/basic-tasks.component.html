@@ -1,14 +1,14 @@
 <div [class.task-complete.container]="!toggleButton" class="container task-area">
-  <div *ngIf="tasksOptions.variant === 'right'" class="app-container">
-    <p class="task-content">{{givenNum}} {{tasksOptions.operator}} {{whenNum}} = ?</p>
+  <div *ngIf="tasksOptions.qMarkPosition === qMarkPosition.right" class="app-container">
+    <p class="task-content">{{givenNum}} {{tasksOptions.mathOperator}} {{whenNum}} = ?</p>
     <hr>
   </div>
-  <div *ngIf="tasksOptions.variant === 'center'" class="app-container">
-    <p class="task-content">{{givenNum}} {{tasksOptions.operator}} ? = {{resultNum}}</p>
+  <div *ngIf="tasksOptions.qMarkPosition === qMarkPosition.center" class="app-container">
+    <p class="task-content">{{givenNum}} {{tasksOptions.mathOperator}} ? = {{resultNum}}</p>
     <hr>
   </div>
-  <div *ngIf="tasksOptions.variant === 'left'" class="app-container">
-    <p class="task-content">? {{tasksOptions.operator}} {{whenNum}} = {{resultNum}}</p>
+  <div *ngIf="tasksOptions.qMarkPosition === qMarkPosition.left" class="app-container">
+    <p class="task-content">? {{tasksOptions.mathOperator}} {{whenNum}} = {{resultNum}}</p>
     <hr>
   </div>
   <div class="check-answer">

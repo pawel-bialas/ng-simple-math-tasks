@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import{TasksOptions} from "../model/TasksOptions";
 import {TasksOptionsService} from "../service/tasks-options.service";
 import {MaterialModule} from "../../material/material.module";
+import {QMarkPosition} from "../model/QMarkPosition";
+import {MathOperator} from "../model/mathOperator";
 
 @Component({
   selector: 'task-window',
@@ -13,7 +15,9 @@ export class TaskWindowComponent implements OnInit {
 
   completeSolution: any[] = [];
   isStarted: boolean = false;
-  tasksOptions: TasksOptions = new TasksOptions(0, 10, 'right', '+');
+  tasksOptions: TasksOptions = new TasksOptions(0, 10, QMarkPosition.right, MathOperator.add);
+  qMarkPosition = QMarkPosition;
+  mathOperator = MathOperator;
   score: number = 0;
 
   constructor(private tasksOptionsService: TasksOptionsService)  {
@@ -44,12 +48,12 @@ export class TaskWindowComponent implements OnInit {
     this.tasksOptionsService.updateSetup(this.tasksOptions);
   }
 
-  updateVariant(variant: String):void {
-    this.tasksOptions.variant = variant;
+  updateVariant(variant: QMarkPosition):void {
+    this.tasksOptions.qMarkPosition = variant;
     this.tasksOptionsService.updateSetup(this.tasksOptions);
   }
-  updateOperator(operator: String) {
-    this.tasksOptions.operator = operator;
+  updateOperator(operator: MathOperator) {
+    this.tasksOptions.mathOperator = operator;
     this.tasksOptionsService.updateSetup(this.tasksOptions);
   }
 

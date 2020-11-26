@@ -3,6 +3,8 @@ import {UUID} from "angular2-uuid";
 import {TasksOptions} from "../model/TasksOptions";
 import {TasksOptionsService} from "../service/tasks-options.service";
 import {Observable} from "rxjs";
+import {QMarkPosition} from "../model/QMarkPosition";
+import {MathOperator} from "../model/mathOperator";
 
 
 @Component({
@@ -21,24 +23,25 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
   @Output() solution: EventEmitter<any> = new EventEmitter<any>();
   tasksOptions$: Observable<TasksOptions> = this.tasksOptionsService.data$;
   tasksOptions!: TasksOptions;
+  qMarkPosition = QMarkPosition;
 
   constructor(private tasksOptionsService: TasksOptionsService) {
     this.tasksOptions$.subscribe(value => {
-      this.tasksOptions = new TasksOptions(value.quantity, value.range, value.variant, value.operator);
+      this.tasksOptions = new TasksOptions(value.quantity, value.range, value.qMarkPosition, value.mathOperator);
     });
     this.uuid = UUID.UUID();
-    if (this.tasksOptions.variant === 'right'){
+    if (this.tasksOptions.qMarkPosition === QMarkPosition.right){
       this.givenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1);
       this.whenNum = Math.floor((Math.random() *  this.tasksOptions.range / 2) + 1 + this.givenNum);
       this.resultNum = 0
     }
-    if (this.tasksOptions.variant === 'center') {
+    if (this.tasksOptions.qMarkPosition === QMarkPosition.center) {
       this.givenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1);
       this.whenNum = 0;
       this.resultNum = Math.floor((Math.random() *  this.tasksOptions.range / 2) + 1 + this.givenNum);
 
     }
-    if (this.tasksOptions.variant === 'left') {
+    if (this.tasksOptions.qMarkPosition === QMarkPosition.left) {
       this.givenNum = 0;
       this.whenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1);
       this.resultNum = Math.floor((Math.random() *  this.tasksOptions.range / 2) + 1 + this.whenNum);
@@ -51,13 +54,13 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
   }
 
   addAnswer(): void {
-    if (this.tasksOptions.variant === 'right') {
+    if (this.tasksOptions.qMarkPosition === QMarkPosition.right) {
      this.resultNum = this.userNumber;
     }
-    if (this.tasksOptions.variant === 'center') {
+    if (this.tasksOptions.qMarkPosition === QMarkPosition.center) {
      this.whenNum = this.userNumber;
     }
-    if (this.tasksOptions.variant === 'left') {
+    if (this.tasksOptions.qMarkPosition === QMarkPosition.left) {
       this.givenNum = this.userNumber;
     }
     this.solution.emit(
@@ -71,13 +74,13 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
   }
 
   checkAnswer(): boolean {
-    if (this.tasksOptions.operator === '+'){
+    if (this.tasksOptions.mathOperator === MathOperator.add){
       return this.givenNum + this.whenNum === this.resultNum;
-    } else if (this.tasksOptions.operator === '-'){
+    } else if (this.tasksOptions.mathOperator === MathOperator.subtract){
       return this.givenNum - this.whenNum === this.resultNum;
-    } else if (this.tasksOptions.operator === '*'){
+    } else if (this.tasksOptions.mathOperator === MathOperator.multiply){
       return this.givenNum * this.whenNum === this.resultNum;
-    } else if (this.tasksOptions.operator === '/'){
+    } else if (this.tasksOptions.mathOperator === MathOperator.divide){
       return this.givenNum / this.whenNum === this.resultNum;
     } else return false;
 
