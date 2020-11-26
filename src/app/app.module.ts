@@ -11,7 +11,7 @@ import {MaterialModule} from "./material/material.module";
 
 import {AppComponent} from './app.component';
 import {MainNavComponent} from './main-nav/main-nav.component';
-import {BasicAddTasksComponent} from './tasks/basic-add-tasks/basic-add-tasks.component';
+import {BasicTasksComponent} from './tasks/basic-add-tasks/basic-tasks.component';
 import {LoginComponent} from './authentication/login/login.component';
 import {TaskWindowComponent} from './tasks/task-window/task-window.component';
 
@@ -25,7 +25,7 @@ import {AngularFireDatabaseModule} from "@angular/fire/database";
   declarations: [
     AppComponent,
     MainNavComponent,
-    BasicAddTasksComponent,
+    BasicTasksComponent,
     TaskWindowComponent,
     LoginComponent
   ],

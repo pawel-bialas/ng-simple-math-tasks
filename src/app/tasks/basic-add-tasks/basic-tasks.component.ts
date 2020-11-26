@@ -7,10 +7,10 @@ import {Observable} from "rxjs";
 
 @Component({
   selector: 'basic-add-tasks',
-  templateUrl: './basic-add-tasks.component.html',
-  styleUrls: ['./basic-add-tasks.component.css']
+  templateUrl: './basic-tasks.component.html',
+  styleUrls: ['./basic-tasks.component.css']
 })
-export class BasicAddTasksComponent implements OnInit, OnDestroy {
+export class BasicTasksComponent implements OnInit, OnDestroy {
 
   givenNum: number = 0;
   whenNum: number = 0;
@@ -24,7 +24,7 @@ export class BasicAddTasksComponent implements OnInit, OnDestroy {
 
   constructor(private tasksOptionsService: TasksOptionsService) {
     this.tasksOptions$.subscribe(value => {
-      this.tasksOptions = new TasksOptions(value.quantity, value.range, value.variant);
+      this.tasksOptions = new TasksOptions(value.quantity, value.range, value.variant, value.operator);
     });
     this.uuid = UUID.UUID();
     if (this.tasksOptions.variant === 'right'){
@@ -71,7 +71,16 @@ export class BasicAddTasksComponent implements OnInit, OnDestroy {
   }
 
   checkAnswer(): boolean {
-    return this.givenNum + this.whenNum === this.resultNum;
+    if (this.tasksOptions.operator === '+'){
+      return this.givenNum + this.whenNum === this.resultNum;
+    } else if (this.tasksOptions.operator === '-'){
+      return this.givenNum - this.whenNum === this.resultNum;
+    } else if (this.tasksOptions.operator === '*'){
+      return this.givenNum * this.whenNum === this.resultNum;
+    } else if (this.tasksOptions.operator === '/'){
+      return this.givenNum / this.whenNum === this.resultNum;
+    } else return false;
+
   }
 
   ngOnDestroy(): void {

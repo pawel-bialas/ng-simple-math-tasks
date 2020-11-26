@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
+import {AuthService} from "../authentication/auth.service";
 
 @Component({
   selector: 'main-nav',
@@ -16,7 +17,8 @@ export class MainNavComponent implements OnInit {
       map(result => result.matches)
     );
 
-  constructor(private router: Router, private breakpointObserver: BreakpointObserver) { }
+
+  constructor(public authService: AuthService, private router: Router, private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
   }

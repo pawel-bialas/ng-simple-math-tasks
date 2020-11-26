@@ -7,7 +7,7 @@ import {TasksOptions} from "../model/TasksOptions";
 })
 export class TasksOptionsService {
 
-  private dataTank = new BehaviorSubject(new TasksOptions(4,10,'right'));
+  private dataTank = new BehaviorSubject(new TasksOptions(4,10,'right','+'));
   data$: Observable<TasksOptions> = this.dataTank.asObservable();
 
   constructor() { }

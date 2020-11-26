@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import{TasksOptions} from "../model/TasksOptions";
 import {TasksOptionsService} from "../service/tasks-options.service";
+import {MaterialModule} from "../../material/material.module";
 
 @Component({
   selector: 'task-window',
@@ -12,7 +13,7 @@ export class TaskWindowComponent implements OnInit {
 
   completeSolution: any[] = [];
   isStarted: boolean = false;
-  tasksOptions: TasksOptions = new TasksOptions(0, 10, 'right');
+  tasksOptions: TasksOptions = new TasksOptions(0, 10, 'right', '+');
   score: number = 0;
 
   constructor(private tasksOptionsService: TasksOptionsService)  {
@@ -45,6 +46,10 @@ export class TaskWindowComponent implements OnInit {
 
   updateVariant(variant: String):void {
     this.tasksOptions.variant = variant;
+    this.tasksOptionsService.updateSetup(this.tasksOptions);
+  }
+  updateOperator(operator: String) {
+    this.tasksOptions.operator = operator;
     this.tasksOptionsService.updateSetup(this.tasksOptions);
   }
 

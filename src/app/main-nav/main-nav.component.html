@@ -8,7 +8,7 @@
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a [routerLink]="['/home']" mat-button>
+      <a [routerLink]="['/']" mat-button>
         <mat-icon>home</mat-icon>
         Home
       </a>
@@ -16,11 +16,11 @@
         <mat-icon>group_add</mat-icon>
         Sign Up!
       </a>
-      <a  mat-button>
+      <a  mat-button (click)="authService.googleSignIn()">
         <mat-icon>lock_open</mat-icon>
         Login
       </a>
-      <a  mat-button>
+      <a  mat-button (click)="authService.signOut()">
         <mat-icon>lock</mat-icon>
         Logout
       </a>
@@ -44,9 +44,9 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <div fxHide.lt-md>
+      <div>
         <span class="spacer"></span>
-        <a [routerLink]="['/home']" mat-button>
+        <a [routerLink]="['/']" mat-button>
           <mat-icon>home</mat-icon>
           Home
         </a>

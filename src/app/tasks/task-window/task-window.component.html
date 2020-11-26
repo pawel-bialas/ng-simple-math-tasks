@@ -24,6 +24,32 @@
     </div>
     <div class="setup-area">
       <div class="setup-container">
+        <h2>Select operator</h2>
+        <div class="button-container">
+          <div class="setup-option">
+            <button mat-fab color="accent" (click)="updateOperator('+')">
+              +
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="accent" (click)="updateOperator('-')">
+              -
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="accent" (click)="updateOperator('*')">
+             *
+            </button>
+          </div>
+        </div>
+        <div class="setup-option">
+          <button mat-fab color="accent" (click)="updateOperator('/')">
+            /
+          </button>
+        </div>
+      </div>
+      </div>
+      <div class="setup-container">
         <h2>How many tasks?</h2>
         <div class="button-container">
           <div class="setup-option">
@@ -82,7 +108,7 @@
         <h3>{{tasksOptions | json}}</h3>
         <button [disabled]="tasksOptions.quantity < 1" (click)="startChallenge()" mat-raised-button color="primary" style="margin-left: 7px">START</button>
       </div>
-    </div>
+
   </ng-container>
 
   <ng-container *ngIf="isStarted" class="container">
