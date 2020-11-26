@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {TasksOptions} from "../model/TasksOptions";
 import {QMarkPosition} from "../model/QMarkPosition";
-import {MathOperator} from "../model/mathOperator";
+import {MathOperator} from "../model/MathOperator";
 
 @Injectable({
   providedIn: 'root'

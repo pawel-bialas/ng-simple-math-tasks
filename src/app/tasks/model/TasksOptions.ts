@@ -1,5 +1,5 @@
 import {QMarkPosition} from "./QMarkPosition";
-import {MathOperator} from "./mathOperator";
+import {MathOperator} from "./MathOperator";
 
 export class TasksOptions {
 

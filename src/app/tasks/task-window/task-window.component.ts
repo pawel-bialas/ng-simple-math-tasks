@@ -4,7 +4,7 @@ import{TasksOptions} from "../model/TasksOptions";
 import {TasksOptionsService} from "../service/tasks-options.service";
 import {MaterialModule} from "../../material/material.module";
 import {QMarkPosition} from "../model/QMarkPosition";
-import {MathOperator} from "../model/mathOperator";
+import {MathOperator} from "../model/MathOperator";
 
 @Component({
   selector: 'task-window',
