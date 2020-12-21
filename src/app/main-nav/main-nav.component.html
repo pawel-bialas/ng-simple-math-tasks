@@ -50,25 +50,22 @@
           <mat-icon>home</mat-icon>
           Home
         </a>
-        <a mat-button>
+        <a  mat-button>
           <mat-icon>group_add</mat-icon>
           Sign Up!
         </a>
-        <a mat-button>
+        <a  mat-button (click)="authService.googleSignIn()">
           <mat-icon>lock_open</mat-icon>
           Login
         </a>
-        <a mat-button>
+        <a  mat-button (click)="authService.signOut()">
           <mat-icon>lock</mat-icon>
           Logout
         </a>
-        <a style="justify-content: flex-end" mat-button>
-          <mat-icon>announcement</mat-icon>
-          New Post
-        </a>
+        <p *ngIf="userModel != null">Welcome {{userModel.displayName}} </p>
       </div>
     </mat-toolbar>
-    <!-- Add Content Here -->
+
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

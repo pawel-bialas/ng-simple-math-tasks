@@ -19,6 +19,8 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {RouterModule} from "@angular/router";
+import {ROUTES} from "./routing/routes";
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import {AngularFireDatabaseModule} from "@angular/fire/database";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot(ROUTES),
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
