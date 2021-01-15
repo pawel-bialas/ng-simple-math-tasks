@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import {AuthService} from "./authentication/auth.service";
-import {UserService} from "./user/user.service";
-import {Router} from "@angular/router";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -12,24 +9,8 @@ export class AppComponent {
 
   title = 'simple-math-tasks';
 
-  constructor(
-    public authService: AuthService,
-    private userService: UserService,
-    private router: Router
-  ) {
-    authService.dbUser.subscribe(user => {
-      if (!user) {
-        return;
-      } else {
-        userService.save(user);
-        const returnUrl = localStorage.getItem('returnUrl');
-        if (!returnUrl) {
-          return;
-        } else {
-          localStorage.removeItem('returnUrl');
-          router.navigateByUrl(returnUrl);
-        }
-      }
-    });
+  constructor() {
   }
 }
+
+

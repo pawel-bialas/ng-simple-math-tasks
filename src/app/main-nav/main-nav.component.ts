@@ -18,15 +18,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
       map(result => result.matches)
     );
 
-  userModel: UserModel | null | undefined;
-  private subscription = new Subscription();
-
-
   constructor(
     public authService: AuthService,
     private router: Router,
     private breakpointObserver: BreakpointObserver) {
-    this.subscription.add(this.authService.userModel.subscribe(userModel => this.userModel = userModel));
   }
 
   ngOnInit(): void {
@@ -38,7 +33,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+
   }
 
 }

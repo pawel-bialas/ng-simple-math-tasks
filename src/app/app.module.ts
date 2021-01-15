@@ -21,6 +21,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {RouterModule} from "@angular/router";
 import {ROUTES} from "./routing/routes";
+import {HomeComponent} from "./home/home.component";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {ROUTES} from "./routing/routes";
     MainNavComponent,
     BasicTasksComponent,
     TaskWindowComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

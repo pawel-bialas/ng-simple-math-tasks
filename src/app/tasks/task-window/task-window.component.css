@@ -1,10 +1,12 @@
 .setup-area{
   width: 100%;
-  height: 5%;
-  justify-content: space-between;
-  display: flex;
-  flex-direction: row;
-  white-space: nowrap
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 150px;
+  grid-gap: 5%;
+
+  min-height: 100vh;
+  padding: 5%;
 }
 
 
@@ -27,6 +29,9 @@
 
 .setup-option{
   margin: 15%;
+  padding: 3%;
+  display: flex;
+  justify-content: center;
 }
 
 .setup-text{

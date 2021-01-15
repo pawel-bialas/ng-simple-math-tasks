@@ -12,21 +12,13 @@
         <mat-icon>home</mat-icon>
         Home
       </a>
-      <a  mat-button>
-        <mat-icon>group_add</mat-icon>
-        Sign Up!
-      </a>
-      <a  mat-button (click)="authService.googleSignIn()">
+      <a>
         <mat-icon>lock_open</mat-icon>
         Login
       </a>
-      <a  mat-button (click)="authService.signOut()">
+      <a>
         <mat-icon>lock</mat-icon>
         Logout
-      </a>
-      <a style="justify-content: flex-end" mat-button>
-        <mat-icon>announcement</mat-icon>
-        New Post
       </a>
       <a (click)="drawer.toggle()" mat-button>
         <mat-icon>close</mat-icon>
@@ -45,24 +37,18 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <div>
-        <span class="spacer"></span>
         <a [routerLink]="['/']" mat-button>
           <mat-icon>home</mat-icon>
           Home
         </a>
-        <a  mat-button>
-          <mat-icon>group_add</mat-icon>
-          Sign Up!
-        </a>
-        <a  mat-button (click)="authService.googleSignIn()">
+        <a (click)="authService.googleLogin()" mat-button>
           <mat-icon>lock_open</mat-icon>
           Login
         </a>
-        <a  mat-button (click)="authService.signOut()">
+        <a (click)="authService.signOut()" mat-button>
           <mat-icon>lock</mat-icon>
           Logout
         </a>
-        <p *ngIf="userModel != null">Welcome {{userModel.displayName}} </p>
       </div>
     </mat-toolbar>
 
