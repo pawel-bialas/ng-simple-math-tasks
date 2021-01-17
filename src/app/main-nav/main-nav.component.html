@@ -8,13 +8,13 @@
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a [routerLink]="['/']" mat-button>
-        <mat-icon>home</mat-icon>
-        Home
-      </a>
       <a>
         <mat-icon>lock_open</mat-icon>
         Login
+      </a>
+      <a [routerLink]="['/']" mat-button>
+        <mat-icon>home</mat-icon>
+        Home
       </a>
       <a>
         <mat-icon>lock</mat-icon>
@@ -41,17 +41,22 @@
           <mat-icon>home</mat-icon>
           Home
         </a>
-        <a (click)="authService.googleLogin()" mat-button>
-          <mat-icon>lock_open</mat-icon>
-          Login
-        </a>
-        <a (click)="authService.signOut()" mat-button>
+        <ng-template #anonymousUser>
+          <a (click)="authService.googleLogin()" mat-button>
+            <mat-icon>lock_open</mat-icon>
+            Login
+          </a>
+        </ng-template>
+        <a *ngIf="user$ | async as user; else anonymousUser" (click)="authService.signOut()" mat-button>
           <mat-icon>lock</mat-icon>
           Logout
         </a>
+        <a *ngIf="user$ | async as user" mat-button>
+          <mat-icon>face</mat-icon>
+          Welcome {{user.displayName}}
+        </a>
       </div>
     </mat-toolbar>
-
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

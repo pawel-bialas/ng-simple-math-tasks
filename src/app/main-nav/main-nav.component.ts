@@ -5,6 +5,8 @@ import {Observable, Subscription} from "rxjs";
 import {map} from "rxjs/operators";
 import {AuthService} from "../authentication/auth.service";
 import {UserModel} from "../user/user.model";
+import firebase from "firebase";
+import {AngularFireAuth} from "@angular/fire/auth";
 
 @Component({
   selector: 'main-nav',
@@ -18,10 +20,14 @@ export class MainNavComponent implements OnInit, OnDestroy {
       map(result => result.matches)
     );
 
+  user$: Observable<firebase.User | null>;
+
   constructor(
     public authService: AuthService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver) {
+    private breakpointObserver: BreakpointObserver,
+    private fireAuth: AngularFireAuth) {
+    this.user$ = this.fireAuth.authState;
   }
 
   ngOnInit(): void {
