@@ -9,7 +9,7 @@
                   color="accent" style="margin-left: 7px">R E S U L T
           </button>
         </div>
-        <span *ngIf="score > 0">Result: {{score}} / {{tasksOptions.quantity}}</span>
+        <span *ngIf="isCompleted">Result: {{score}} / {{tasksOptions.quantity}}</span>
         <span class="spacer"></span>
       </mat-toolbar>
     </div>
@@ -124,12 +124,12 @@
     <div class="row">
       <div class="col-6">
         <ng-container *ngFor="let i of [].constructor(tasksOptions['quantity'] / 2)">
-          <basic-add-tasks (solution)="updateRecord($event)"></basic-add-tasks>
+          <basic-add-tasks [uid]="uid" (solution)="updateRecord($event)"></basic-add-tasks>
         </ng-container>
       </div>
       <div class="col-6">
         <ng-container *ngFor="let i of [].constructor(tasksOptions['quantity'] / 2)">
-          <basic-add-tasks (solution)="updateRecord($event)"></basic-add-tasks>
+          <basic-add-tasks [uid]="uid" (solution)="updateRecord($event)"></basic-add-tasks>
         </ng-container>
       </div>
     </div>

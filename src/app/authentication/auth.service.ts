@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {UserModel} from "../user/user.model";
-import {Observable, of} from "rxjs";
+import {Observable, of, Subscription} from "rxjs";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
 import {map, switchMap} from "rxjs/operators";
 import firebase from "firebase";
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import {SystemMessage} from "../error/systemMessage";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 export class AuthService {
 
   user$: Observable<UserModel>;
+  userSub: Subscription = new Subscription();
 
   constructor(
     private fireAuth: AngularFireAuth,
@@ -43,6 +45,16 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
+   provideCurrentUserUid(): String | undefined {
+      let result;
+       this.fireAuth.authState.subscribe(user => {
+        if (user) {
+          return result = user.uid;
+        } else return result = SystemMessage.userNotFound;
+      })
+    return result;
+  }
+
   private async updateUserData(user: firebase.User) {
     const userRef: AngularFirestoreDocument<any> = this.fireStore.doc('users/' + user.uid);
 
@@ -62,5 +74,9 @@ export class AuthService {
 
   private async isAdmin(user: firebase.User): Promise<boolean> {
     return await this.fireStore.doc('users/' + user.uid).get().toPromise().then(data => data.get('isAdmin'));
+  }
+
+  private async getUserUid(uid: String | undefined): Promise<String> {
+    return await this.fireStore.doc('users/' + uid).get().toPromise().then(data => data.get('uid'));
   }
 }

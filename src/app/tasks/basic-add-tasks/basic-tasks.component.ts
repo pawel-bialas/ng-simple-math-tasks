@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UUID} from "angular2-uuid";
 import {TasksOptions} from "../model/TasksOptions";
 import {TasksOptionsService} from "../service/tasks-options.service";
@@ -18,8 +18,8 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
   whenNum: number = 0;
   resultNum: number = 0;
   userNumber: number = 0;
-  uuid: String;
   toggleButton: boolean = true;
+  @Input('uid') uid!: String;
   @Output() solution: EventEmitter<any> = new EventEmitter<any>();
   tasksOptions$: Observable<TasksOptions> = this.tasksOptionsService.data$;
   tasksOptions!: TasksOptions;
@@ -29,7 +29,6 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
     this.tasksOptions$.subscribe(value => {
       this.tasksOptions = new TasksOptions(value.quantity, value.range, value.qMarkPosition, value.mathOperator);
     });
-    this.uuid = UUID.UUID();
     if (this.tasksOptions.qMarkPosition === QMarkPosition.right && this.tasksOptions.mathOperator !== MathOperator.subtract && this.tasksOptions.mathOperator !== MathOperator.divide) {
       this.givenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1);
       this.whenNum = Math.floor((Math.random() * this.tasksOptions.range / 2) + 1 + this.givenNum);
@@ -94,8 +93,9 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
     this.solution.emit(
       {
         task: [this.givenNum, this.whenNum, this.resultNum],
-        uuid: this.uuid,
-        result: this.checkAnswer()
+        result: this.checkAnswer(),
+        uid: this.uid,
+        taskOptions: this.tasksOptions
       }
     )
     this.toggleButton = !this.toggleButton;
