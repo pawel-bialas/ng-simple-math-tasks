@@ -69,6 +69,16 @@ export class TaskWindowComponent implements OnInit {
     })
     this.score = result;
     this.isCompleted = true;
-    this.solutionService.saveSolution(this.completeSolution, this.score);
+    this.saveResult();
+  }
+
+  saveResult(): void {
+    this.completeSolution.push({
+      uid: this.uid,
+      score: this.score,
+      taskOptions: this.tasksOptions
+    })
+    console.log('saveResult' + this.completeSolution[this.completeSolution.length - 1]);
+    this.solutionService.saveSolution(this.completeSolution);
   }
 }

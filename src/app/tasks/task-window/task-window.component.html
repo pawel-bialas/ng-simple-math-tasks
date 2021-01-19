@@ -3,7 +3,7 @@
     <div class="container">
       <mat-toolbar class="setup-text">
         <span class="spacer"></span>
-        <span>Progress: {{completeSolution.length}} / {{tasksOptions.quantity}}</span>
+        <span *ngIf="!isCompleted">Progress: {{completeSolution.length}} / {{tasksOptions.quantity}}</span>
         <div>
           <button [disabled]="completeSolution.length < tasksOptions.quantity" (click)="getResult()" mat-raised-button
                   color="accent" style="margin-left: 7px">R E S U L T

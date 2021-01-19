@@ -94,8 +94,6 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
       {
         task: [this.givenNum, this.whenNum, this.resultNum],
         result: this.checkAnswer(),
-        uid: this.uid,
-        taskOptions: this.tasksOptions
       }
     )
     this.toggleButton = !this.toggleButton;

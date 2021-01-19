@@ -13,10 +13,9 @@ export class SolutionService {
 
   }
 
-   saveSolution(completeSolution: any[], score: number): void {
+   saveSolution(completeSolution: any[]): void {
     var uid = this.authService.provideCurrentUserUid();
     console.log("uid: " + uid);
-
   }
 
 }
