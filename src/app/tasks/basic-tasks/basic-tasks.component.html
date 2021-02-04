@@ -13,15 +13,15 @@
   </div>
   <div class="check-answer">
     <form class="form-group task-form">
-        <mat-form-field class="input-full-width">
-          <mat-label>Answer</mat-label>
-            <input
-              matInput
-              name="userInput"
-              [(ngModel)]="userNumber"
-              type="number"
-            >
-        </mat-form-field>
+      <mat-form-field class="input-full-width">
+        <mat-label>Answer</mat-label>
+        <input
+          matInput
+          name="userInput"
+          [(ngModel)]="userNumber"
+          type="number"
+        >
+      </mat-form-field>
       <div class="input-full-width">
         <button
           mat-raised-button color="primary"
@@ -31,6 +31,17 @@
           type="submit"
         >++ Add ++
         </button>
+
+        <div class="task-result" *ngIf="correct && taskWindow.isCompleted">
+          <span class="material-icons green">
+            maps_ugc
+          </span>
+        </div>
+        <div class="task-result" *ngIf="!correct && taskWindow.isCompleted">
+          <span class="material-icons red">
+            do_disturb_on
+          </span>
+        </div>
       </div>
     </form>
     <hr>

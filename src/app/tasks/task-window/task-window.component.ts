@@ -16,7 +16,7 @@ export class TaskWindowComponent implements OnInit {
   completeSolution: any[] = [];
   @Output() uid: String = UUID.UUID();
   isStarted: boolean = false;
-  isCompleted: boolean = false;
+  public isCompleted: boolean = false;
   tasksOptions: TasksOptions = new TasksOptions(0, 10, QMarkPosition.right, MathOperator.add);
   qMarkPosition = QMarkPosition;
   mathOperator = MathOperator;

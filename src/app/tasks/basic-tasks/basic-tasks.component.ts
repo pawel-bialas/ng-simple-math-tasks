@@ -5,6 +5,7 @@ import {TasksOptionsService} from "../service/tasks-options.service";
 import {Observable} from "rxjs";
 import {QMarkPosition} from "../model/QMarkPosition";
 import {MathOperator} from "../model/MathOperator";
+import {TaskWindowComponent} from "../task-window/task-window.component";
 
 
 @Component({
@@ -19,13 +20,14 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
   resultNum: number = 0;
   userNumber: number = 0;
   toggleButton: boolean = true;
+  correct: boolean = false;
   @Input('uid') uid!: String;
   @Output() solution: EventEmitter<any> = new EventEmitter<any>();
   tasksOptions$: Observable<TasksOptions> = this.tasksOptionsService.data$;
   tasksOptions!: TasksOptions;
   qMarkPosition = QMarkPosition;
 
-  constructor(private tasksOptionsService: TasksOptionsService) {
+  constructor(private tasksOptionsService: TasksOptionsService, public taskWindow: TaskWindowComponent) {
     this.tasksOptions$.subscribe(value => {
       this.tasksOptions = new TasksOptions(value.quantity, value.range, value.qMarkPosition, value.mathOperator);
     });
@@ -96,6 +98,7 @@ export class BasicTasksComponent implements OnInit, OnDestroy {
         result: this.checkAnswer(),
       }
     )
+    this.correct = this.checkAnswer();
     this.toggleButton = !this.toggleButton;
   }
 
