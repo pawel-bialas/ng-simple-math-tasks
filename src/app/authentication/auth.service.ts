@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {UserModel} from "../user/user.model";
-import {Observable, of, Subscription} from "rxjs";
-import {AngularFireAuth} from "@angular/fire/auth";
-import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
-import {Router} from "@angular/router";
-import {map, switchMap} from "rxjs/operators";
-import firebase from "firebase";
+import {UserModel} from '../user/user.model';
+import {Observable, of, Subscription} from 'rxjs';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
+import {map, switchMap} from 'rxjs/operators';
+import firebase from 'firebase';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
-import {SystemMessage} from "../error/systemMessage";
+import {SystemMessage} from '../error/systemMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -30,32 +30,34 @@ export class AuthService {
           return of(null);
         }
       })
-    )
+    );
 
   }
 
-  async googleLogin() {
+  async googleLogin(): Promise<void> {
     const provider = new GoogleAuthProvider();
-    let userCredential = await this.fireAuth.signInWithPopup(provider);
-    return this.updateUserData(<firebase.User>userCredential.user);
+    const userCredential = await this.fireAuth.signInWithPopup(provider);
+    return this.updateUserData(userCredential.user as firebase.User);
   }
 
-  async signOut() {
+  async signOut(): Promise<boolean> {
     await this.fireAuth.signOut();
     return this.router.navigate(['/']);
   }
 
-   provideCurrentUserUid(): String | undefined {
-      let result;
-       this.fireAuth.authState.subscribe(user => {
-        if (user) {
-          return result = user.uid;
-        } else return result = SystemMessage.userNotFound;
-      })
+  provideCurrentUserUid(): string | undefined {
+    let result;
+    this.fireAuth.authState.subscribe(user => {
+      if (user) {
+        result = user.uid;
+      } else {
+        result = SystemMessage.userNotFound;
+      }
+    });
     return result;
   }
 
-  private async updateUserData(user: firebase.User) {
+  private async updateUserData(user: firebase.User): Promise<void> {
     const userRef: AngularFirestoreDocument<any> = this.fireStore.doc('users/' + user.uid);
 
     let isAdmin: boolean = await this.isAdmin(user);
@@ -68,7 +70,7 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       isAdmin: isAdmin
-    }
+    };
     userRef.set(data, {merge: true});
   }
 
@@ -76,7 +78,7 @@ export class AuthService {
     return await this.fireStore.doc('users/' + user.uid).get().toPromise().then(data => data.get('isAdmin'));
   }
 
-  private async getUserUid(uid: String | undefined): Promise<String> {
+  private async getUserUid(uid: string | undefined): Promise<string> {
     return await this.fireStore.doc('users/' + uid).get().toPromise().then(data => data.get('uid'));
   }
 }
